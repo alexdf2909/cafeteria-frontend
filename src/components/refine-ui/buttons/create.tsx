@@ -6,6 +6,7 @@ import { Plus } from "lucide-react";
 import React from "react";
 
 type CreateButtonProps = {
+    label?: string;
   /**
    * Resource name for API data interactions. `identifier` of the resource can be used instead of the `name` of the resource.
    * @default Inferred resource name from the route
@@ -28,7 +29,7 @@ type CreateButtonProps = {
 export const CreateButton = React.forwardRef<
   React.ComponentRef<typeof Button>,
   CreateButtonProps
->(({ resource, accessControl, meta, children, onClick, ...rest }, ref) => {
+>(({ label: customLabel,resource, accessControl, meta, children, onClick, ...rest }, ref) => {
   const { hidden, disabled, LinkComponent, to, label } = useCreateButton({
     resource,
     accessControl,
@@ -59,7 +60,7 @@ export const CreateButton = React.forwardRef<
         {children ?? (
           <div className="flex items-center gap-2 font-semibold">
             <Plus className="w-4 h-4" />
-            <span>{label ?? "Create"}</span>
+              <span>{customLabel ?? label ?? "Create"}</span>
           </div>
         )}
       </LinkComponent>
